@@ -25,12 +25,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         activityMovieDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details);
 
-        Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w500/1HOBv1QxSbTwn5VyZ2vAVRhdR8e.jpg")
-                .placeholder(R.drawable.no_image)
-                .error(R.drawable.ic_launcher_background)
-                .into(selectedMoviePoster);
-
         int id = getIntent().getIntExtra("movieId", -1);
         if(id == -1){
             Toast.makeText(this, "Failed to fetch data.", Toast.LENGTH_SHORT).show();
