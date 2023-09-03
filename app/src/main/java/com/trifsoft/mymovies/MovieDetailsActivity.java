@@ -35,7 +35,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         movieDetailsActivityViewModel.getMovieDataMutableLiveData(movieDetailsActivityViewModel.intentId).observe(this, movieData -> {
             activityMovieDetailsBinding.setMovieData(movieData);
             Glide.with(MovieDetailsActivity.this)
-                .load("https://image.tmdb.org/t/p/w500" + movieData.getBackdropPath())
+                .load("https://image.tmdb.org/t/p/w500" + movieData.getPosterPath())
                 .placeholder(R.drawable.no_image)
                 .into(selectedMoviePoster);
         });

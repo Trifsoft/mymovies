@@ -53,7 +53,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MyVi
 
 		Glide
 				.with(context)
-				.load("https://image.tmdb.org/t/p/w500" + myListData.getBackdropPath())
+				.load("https://image.tmdb.org/t/p/w500" + myListData.getPosterPath())
 				.centerCrop()
 				.placeholder(R.drawable.no_image)
 				.into(holder.moviePoster);

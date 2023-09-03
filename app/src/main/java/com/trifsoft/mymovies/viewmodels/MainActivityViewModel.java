@@ -1,5 +1,8 @@
 package com.trifsoft.mymovies.viewmodels;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -13,8 +16,8 @@ public class MainActivityViewModel extends ViewModel {
 
     public MutableLiveData<ArrayList<Result>> allMoviesMutableLiveData;
     public MainActivityViewModel() {
-        appRepository = new AppRepository();
-        allMoviesMutableLiveData = null;
+        this.appRepository = new AppRepository();
+        this.allMoviesMutableLiveData = null;
     }
 
     public MutableLiveData<ArrayList<Result>> getAllMoviesMutableLiveData() {
