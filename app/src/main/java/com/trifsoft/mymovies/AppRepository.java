@@ -22,10 +22,10 @@ public class AppRepository {
 	private final MutableLiveData<ArrayList<Result>> allMoviesMutableLiveData = new MutableLiveData<>();
 	private final MutableLiveData<MovieData> movieDataMutableLiveData = new MutableLiveData<>();
 
-	public MutableLiveData<ArrayList<Result>> getAllMoviesMutableLiveData(int page) {
+	public MutableLiveData<ArrayList<Result>> getAllMoviesMutableLiveData() {
 		MovieDataService movieDataService = RetrofitInstance.getMovieDataService();
 
-		Call<AllMoviesData> call = movieDataService.getAllMoviesData("b7b587bdbe6ac708867c87c7e943e29f", page);
+		Call<AllMoviesData> call = movieDataService.getAllMoviesData("b7b587bdbe6ac708867c87c7e943e29f");
 
 		call.enqueue(new Callback<AllMoviesData>() {
 			@Override

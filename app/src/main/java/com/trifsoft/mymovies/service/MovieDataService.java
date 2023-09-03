@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 public interface MovieDataService {
 
 	@GET("movie/popular")
-	Call<AllMoviesData> getAllMoviesData(@Query("api_key") String api_key, @Query("page") int page);
+	Call<AllMoviesData> getAllMoviesData(@Query("api_key") String api_key);
 
 	@GET("movie/{movieId}")
 	Call<MovieData> getMovieData(@Path("movieId") int movieId, @Query("api_key") String api_key);
