@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.trifsoft.mymovies.db.AppDatabase;
+import com.trifsoft.mymovies.db.MovieDataDAO;
 import com.trifsoft.mymovies.db.ResultDAO;
 import com.trifsoft.mymovies.models.AllMoviesData;
 import com.trifsoft.mymovies.models.MovieData;
@@ -33,10 +34,13 @@ public class AppRepository {
 
 	private ResultDAO resultDAO;
 
+	private MovieDataDAO movieDataDAO;
+
 	public AppRepository(Application application) {
 		this.application = application;
 		AppDatabase appDatabase = AppDatabase.getInstance(application);
 		resultDAO = appDatabase.resultDAO();
+		movieDataDAO = appDatabase.movieDataDAO();
 	}
 
 	public LiveData<List<Result>> getAllResults() {
@@ -76,16 +80,57 @@ public class AppRepository {
 		});
 	}
 
-	public void clearTableAndInsertResults(ArrayList<Result> results){
+	public void clearTablesAndInsertResults(ArrayList<Result> results){
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 
 		executor.execute(new Runnable() {
 			@Override
 			public void run() {
 				resultDAO.clearTable();
+				movieDataDAO.clearTable();
 				for(Result result: results){
 					resultDAO.insert(result);
 				}
+			}
+		});
+	}
+
+	public LiveData<List<MovieData>> getAllMovieDatas() {
+		return movieDataDAO.getMovieDatas();
+	}
+	public void insertMovieData(MovieData movieData){
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		executor.execute(new Runnable() {
+			@Override
+			public void run() {
+
+				movieDataDAO.insert(movieData);
+			}
+		});
+	}
+	public LiveData<MovieData> getMovieData(long movieDataId){
+		return movieDataDAO.getMovieData(movieDataId);
+	}
+	public void deleteMovieData(MovieData movieData){
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		executor.execute(new Runnable() {
+			@Override
+			public void run() {
+
+				movieDataDAO.delete(movieData);
+			}
+		});
+	}
+	public void updateMovieData(MovieData movieData){
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		executor.execute(new Runnable() {
+			@Override
+			public void run() {
+
+				movieDataDAO.update(movieData);
 			}
 		});
 	}
@@ -104,7 +149,7 @@ public class AppRepository {
 				ArrayList<Result> allResults = (ArrayList<Result>) allMoviesData.getResults();
 				allMoviesMutableLiveData.setValue(allResults);
 
-				clearTableAndInsertResults(allResults);
+				clearTablesAndInsertResults(allResults);
 			}
 
 			@Override
@@ -129,6 +174,8 @@ public class AppRepository {
 				MovieData movieData = response.body();
 				assert movieData != null;
 				movieDataMutableLiveData.setValue(movieData);
+
+				insertMovieData(movieData);
 			}
 
 			@Override

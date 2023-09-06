@@ -1,88 +1,121 @@
 
 package com.trifsoft.mymovies.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
+@Entity(tableName = "movieData", foreignKeys = {
+})
 public class MovieData {
 
     @SerializedName("adult")
     @Expose
+    @Ignore
     private Boolean adult;
     @SerializedName("backdrop_path")
     @Expose
+    @Ignore
     private String backdropPath;
     @SerializedName("belongs_to_collection")
     @Expose
+    @Ignore
     private BelongsToCollection belongsToCollection;
     @SerializedName("budget")
     @Expose
+    @Ignore
     private Integer budget;
     @SerializedName("genres")
     @Expose
+    @Ignore
     private List<Genre> genres;
     @SerializedName("homepage")
     @Expose
+    @Ignore
     private String homepage;
     @SerializedName("id")
     @Expose
+    @ColumnInfo(name = "movieData_id")
+    @PrimaryKey
     private Integer id;
     @SerializedName("imdb_id")
     @Expose
+    @Ignore
     private String imdbId;
     @SerializedName("original_language")
     @Expose
+    @Ignore
     private String originalLanguage;
     @SerializedName("original_title")
     @Expose
+    @Ignore
     private String originalTitle;
     @SerializedName("overview")
     @Expose
+    @ColumnInfo(name = "overview")
     private String overview;
     @SerializedName("popularity")
     @Expose
+    @Ignore
     private Double popularity;
     @SerializedName("poster_path")
     @Expose
+    @ColumnInfo(name = "posterPath")
     private String posterPath;
     @SerializedName("production_companies")
     @Expose
+    @Ignore
     private List<ProductionCompany> productionCompanies;
     @SerializedName("production_countries")
     @Expose
+    @Ignore
     private List<ProductionCountry> productionCountries;
     @SerializedName("release_date")
     @Expose
+    @Ignore
     private String releaseDate;
     @SerializedName("revenue")
     @Expose
+    @Ignore
     private Integer revenue;
     @SerializedName("runtime")
     @Expose
+    @Ignore
     private Integer runtime;
     @SerializedName("spoken_languages")
     @Expose
+    @Ignore
     private List<SpokenLanguage> spokenLanguages;
     @SerializedName("status")
     @Expose
+    @Ignore
     private String status;
     @SerializedName("tagline")
     @Expose
+    @ColumnInfo(name = "tagline")
     private String tagline;
     @SerializedName("title")
     @Expose
+    @ColumnInfo(name = "title")
     private String title;
     @SerializedName("video")
     @Expose
+    @Ignore
     private Boolean video;
     @SerializedName("vote_average")
     @Expose
+    @Ignore
     private Double voteAverage;
     @SerializedName("vote_count")
     @Expose
+    @Ignore
     private Integer voteCount;
 
     public Boolean getAdult() {

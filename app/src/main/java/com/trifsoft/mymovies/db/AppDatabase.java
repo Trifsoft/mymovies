@@ -11,12 +11,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.trifsoft.mymovies.models.MovieData;
 import com.trifsoft.mymovies.models.Result;
 
-@Database(entities = {Result.class}, version = 1)
+@Database(entities = {Result.class, MovieData.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
 	public abstract ResultDAO resultDAO();
+	public abstract MovieDataDAO movieDataDAO();
 
 	private static AppDatabase instance;
 
@@ -25,29 +27,8 @@ public abstract class AppDatabase extends RoomDatabase {
 			instance = Room.databaseBuilder(context.getApplicationContext(),
 				AppDatabase.class, "database")
 				.fallbackToDestructiveMigration()
-				.addCallback(roomCallback)
 				.build();
 		}
 		return instance;
 	}
-
-	private static final RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
-		@Override
-		public void onCreate(@NonNull SupportSQLiteDatabase db) {
-			super.onCreate(db);
-
-			ResultDAO resultDAO = instance.resultDAO();
-
-
-			ExecutorService executor = Executors.newSingleThreadExecutor();
-			executor.execute(new Runnable() {
-				@Override
-				public void run() {
-
-					//TODO Ubaciti pocetne elemente baze podataka u odgovarajuce tabele
-
-				}
-			});
-		}
-	};
 }

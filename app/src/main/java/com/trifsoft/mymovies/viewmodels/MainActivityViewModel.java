@@ -1,6 +1,8 @@
 package com.trifsoft.mymovies.viewmodels;
 
 import android.app.Application;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -36,5 +38,10 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<List<Result>> getAllResults(){
         return appRepository.getAllResults();
+    }
+
+    public boolean isConnected(ConnectivityManager connectivityManager){
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }

@@ -13,7 +13,7 @@ import com.trifsoft.mymovies.models.Result;
 import com.trifsoft.mymovies.viewmodels.MainActivityViewModel;
 
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -35,23 +35,22 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
-        if(isConnected){
-            mainActivityViewModel.getAllMoviesMutableLiveData().observe(this, results -> createAdapter(results));
+        if(mainActivityViewModel.isConnected(cm)){
+            mainActivityViewModel.getAllMoviesMutableLiveData().observe(this, this::createAdapter);
         }
         else{
-            mainActivityViewModel.getAllResults().observe(this, results -> {
-                createAdapter((ArrayList<Result>) results);
-            });
+            Toast.makeText(this, "Network unavailable.", Toast.LENGTH_SHORT).show();
+            mainActivityViewModel.getAllResults().observe(this, results -> createAdapter((ArrayList<Result>) results));
         }
 
     }
 
     private void createAdapter(ArrayList<Result> results) {
-        movieListAdapter = new MovieListAdapter(results, MainActivity.this);
+        if(results != null){
+            movieListAdapter = new MovieListAdapter(results, MainActivity.this);
 
-        recyclerView.setAdapter(movieListAdapter);
+            recyclerView.setAdapter(movieListAdapter);
+        }
     }
 }
