@@ -51,6 +51,14 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation ("com.squareup.retrofit2:converter-gson:$retrofit_version")
 
+    val roomVersion = "2.5.2"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+
+    val lifecycle_version = "2.6.1"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

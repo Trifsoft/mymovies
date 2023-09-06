@@ -1,53 +1,75 @@
 
 package com.trifsoft.mymovies.models;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "result", foreignKeys = {
+})
 public class Result {
 
     @SerializedName("adult")
     @Expose
+    @Ignore
     private Boolean adult;
     @SerializedName("backdrop_path")
     @Expose
+    @Ignore
     private String backdropPath;
     @SerializedName("genre_ids")
     @Expose
+    @Ignore
     private List<Integer> genreIds;
     @SerializedName("id")
     @Expose
+    @ColumnInfo(name = "result_id")
+    @PrimaryKey
     private Integer id;
     @SerializedName("original_language")
     @Expose
+    @Ignore
     private String originalLanguage;
     @SerializedName("original_title")
     @Expose
+    @Ignore
     private String originalTitle;
     @SerializedName("overview")
     @Expose
+    @Ignore
     private String overview;
     @SerializedName("popularity")
     @Expose
+    @Ignore
     private Double popularity;
     @SerializedName("poster_path")
     @Expose
+    @ColumnInfo(name = "posterPath")
     private String posterPath;
     @SerializedName("release_date")
     @Expose
+    @Ignore
     private String releaseDate;
     @SerializedName("title")
     @Expose
+    @ColumnInfo(name = "title")
     private String title;
     @SerializedName("video")
     @Expose
+    @Ignore
     private Boolean video;
     @SerializedName("vote_average")
     @Expose
+    @Ignore
     private Double voteAverage;
     @SerializedName("vote_count")
     @Expose
+    @Ignore
     private Integer voteCount;
 
     public Boolean getAdult() {
