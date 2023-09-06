@@ -30,14 +30,11 @@ public class AppRepository {
 	private final MutableLiveData<ArrayList<Result>> allMoviesMutableLiveData = new MutableLiveData<>();
 	private final MutableLiveData<MovieData> movieDataMutableLiveData = new MutableLiveData<>();
 
-	private final Application application;
+	private final ResultDAO resultDAO;
 
-	private ResultDAO resultDAO;
-
-	private MovieDataDAO movieDataDAO;
+	private final MovieDataDAO movieDataDAO;
 
 	public AppRepository(Application application) {
-		this.application = application;
 		AppDatabase appDatabase = AppDatabase.getInstance(application);
 		resultDAO = appDatabase.resultDAO();
 		movieDataDAO = appDatabase.movieDataDAO();
@@ -46,6 +43,11 @@ public class AppRepository {
 	public LiveData<List<Result>> getAllResults() {
 		return resultDAO.getResults();
 	}
+
+	public LiveData<List<Result>> getResultsFromSearch(String search){
+		return resultDAO.getResultsFromSearch(search);
+	}
+
 	public void insertResult(Result result){
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -98,6 +100,7 @@ public class AppRepository {
 	public LiveData<List<MovieData>> getAllMovieDatas() {
 		return movieDataDAO.getMovieDatas();
 	}
+
 	public void insertMovieData(MovieData movieData){
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 

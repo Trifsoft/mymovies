@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.trifsoft.mymovies.AppRepository;
 import com.trifsoft.mymovies.models.Result;
@@ -38,6 +37,10 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<List<Result>> getAllResults(){
         return appRepository.getAllResults();
+    }
+
+    public LiveData<List<Result>> getResultsFromSearch(String search){
+        return appRepository.getResultsFromSearch(search);
     }
 
     public boolean isConnected(ConnectivityManager connectivityManager){

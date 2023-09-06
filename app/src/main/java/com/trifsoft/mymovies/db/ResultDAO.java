@@ -15,21 +15,24 @@ import java.util.List;
 public interface ResultDAO {
 
 	@Insert
-	public long insert(Result result);
+	void insert(Result result);
 
 	@Update
-	public void update(Result result);
+	void update(Result result);
 
 	@Delete
-	public void delete(Result result);
+	void delete(Result result);
 
 	@Query("select * from result")
-	public LiveData<List<Result>> getResults();
+	LiveData<List<Result>> getResults();
 
 	@Query("select * from result where result_id ==:resultId")
-	public LiveData<Result> getResult(long resultId);
+	LiveData<Result> getResult(long resultId);
 
 	@Query("DELETE FROM result")
-	public void clearTable();
+	void clearTable();
+
+	@Query("select * from result where title like :search || '%'")
+	LiveData<List<Result>> getResultsFromSearch(String search);
 
 }
